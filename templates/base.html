@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixi</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/soft-ui-dashboard-tailwind.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nucleo-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nucleo-svg.css' %}">
+    {% block css_links %}{% endblock %}
+</head>
+<body class="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    {% block content %}{% endblock %}
+</body>
+
+            <!-- plugin for charts  -->
+            <!-- <script src="{% static 'js/plugins/chartjs.min.js' %}" async></script> -->
+            <!-- plugin for scrollbar  -->
+            <script src="{% static 'js/dropdown.js' %}" async></script>
+            <!-- github button -->
+            <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
+            <!-- main script file  -->
+            <!-- <script src="{% static 'js/soft-ui-dashboard-tailwind.js' %}" async></script> -->
+</html>
