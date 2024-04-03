@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from decouple import config
 from pathlib import Path
 from datetime import timedelta
 
@@ -24,7 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ke)ei=qzr*dd_*_ws1fh4iqdd(f*6c$+#_m)z99s*wqpiwtarh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
+
+ALLOWED_HOSTS_STR = config('ALLOWED_HOSTS')
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')]
 
 ALLOWED_HOSTS = ['199.188.203.210','api.pixilin.social']
 
