@@ -30,7 +30,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS_STR = config('ALLOWED_HOSTS')
 ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')]
 
-ALLOWED_HOSTS = ['199.188.203.210','api.pixilin.social']
+#ALLOWED_HOSTS = ['199.188.203.210','api.pixilin.social']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
