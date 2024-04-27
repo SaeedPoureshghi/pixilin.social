@@ -4,6 +4,8 @@ from django.views import View
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from api.models import User
+from decouple import config
+import requests
 
 # Create your views here.
 
@@ -18,11 +20,27 @@ def index(request):
 class LoginView(View):
 
     def get(self, request):
-        return render(request, 'home/login.html')
+        captcha_sitekey = config('CAPTCHA_SITEKEY')
+        return render(request, 'home/login.html', {'captcha_sitekey': captcha_sitekey})
+        
     
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
+        grecaptcha = request.POST.get('g-recaptcha-response')
+        
+        if not grecaptcha:
+            return render(request, 'home/login.html', {'error': 'Please complete the captcha!'})
+        
+        secret = config('CAPTCHA_SECRET')
+        data = {
+            'response': grecaptcha,
+            'secret': secret
+        }
+        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+
+        if not response.json().get('success'):
+            return render(request, 'home/login.html', {'error': 'Invalid captcha!'})
 
         if not username or not password:
             return render(request, 'home/login.html', {'error': 'Please provide all required fields!'})
